@@ -152,9 +152,6 @@ const displayVideos = (videos)=>{
 
 
 
-
-
-
     videos.forEach(video => {
         const videoId  = video.video_id
          
@@ -194,7 +191,7 @@ const displayVideos = (videos)=>{
     
   </div> 
   <button onclick="video('${videoId} ') "
-     class="btn btn-wide space-y-2 text-sm font-semibold text-[#d7252595]">Show Details</button>
+     class="btn w-full p-2  space-x-1 text-sm font-semibold text-[#d7252595]">Show Details</button>
    
 </div>
      
