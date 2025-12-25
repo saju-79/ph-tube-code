@@ -50,11 +50,70 @@ function lodeVideo(){
     .then((data) => displayVideos(data.videos))
     document.getElementById("all-btn").classList.add("active")
 }
+
+/**video ditels */
+function video(ditelsId){
+   const url = `https://openapi.programming-hero.com/api/phero-tube/video/${ditelsId}`
+   fetch(url).then((res)=>res.json())
+   .then((data) =>{
+    displayDitels(data.video)
+   })
+}
+
+const displayDitels=(video)=>{
+   const ditelsVideo = document.getElementById("ditels");
+   document.getElementById("my_modal_5").showModal()
+   const div = document.createElement("div");
+   div.innerHTML=`
+   
+   
+<div class="card  image-full w-full shadow-sm p-0">
+  <figure>
+    <img
+      src="${video.thumbnail}"
+      alt="Shoes" />
+  </figure>
+  <div class="card-body">
+  <h2 class="card-title">${video.title}</h2>
+   <div class='flex items-center '>
+   <p class='text-2xl font-bold '> Hello ${video.authors[0].profile_name} </p>
+   <p class='text-sm font-normal text-end'> your views ${video.others.views} </p>
+   </div>
+   <p> ${video.description}</p>
+  
+   <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+</div>
+</div> 
+
+   
+   
+   `
+
+ditelsVideo.appendChild(div)
+
+
+
+
+
+
+
+
+}
+
+
 const displayVideos = (videos)=>{
     const videoSection = document.getElementById("video-categori");
     videoSection.innerHTML="";
     videos.forEach(video => {
-    
+        const videoId  = video.video_id
+         
+
+        
      
      const videoCard = document.createElement("div");
     
@@ -75,9 +134,8 @@ const displayVideos = (videos)=>{
 </div>
     <div class=" ">
         <h2 class="font-bold text-[#171717] text-lg"> ${video.title}</h2>
-        <h2 class="font-medium text-[#17171770] text-sm flex gap-1"> ${video.authors[0].profile_name} <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-</svg>
+        <h2 class="font-medium text-[#17171770] text-sm flex gap-1"> ${video.authors[0].profile_name}  
+        ${video.authors[0].verified === true ? " verified"  : ""} 
  </h2>
         <h2 class="font-normal text-[#17171770] text-lg"> ${video.others.views} views</h2>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -88,7 +146,10 @@ const displayVideos = (videos)=>{
      
    
     
-  </div>
+  </div> 
+  <button onclick="video('${videoId} ') "
+     class="btn btn-wide space-y-2 text-sm font-semibold text-[#d7252595]">Show Details</button>
+   
 </div>
      
      `
@@ -98,6 +159,10 @@ const displayVideos = (videos)=>{
    });
 
 }
+
+
+
+
 lodeCatagoriItem()
 
  
