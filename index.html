@@ -20,20 +20,33 @@
             <img class="w-30"  src="assist/Logo.png" alt="">
         </div>
         <div class="  ">
-            <button class="btn bg-[#25252520] text-[#252525] text-sm font-medium ">Sort by view</button>
+            <label class="input">
+  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <g
+      stroke-linejoin="round"
+      stroke-linecap="round"
+      stroke-width="2.5"
+      fill="none"
+      stroke="currentColor"
+    >
+      <circle cx="11" cy="11" r="8"></circle>
+      <path d="m21 21-4.3-4.3"></path>
+    </g>
+  </svg>
+  <input id="search-input" type="search" required placeholder="Search" />
+</label>
         </div>
         <div class=""><button class="btn text-[#FFFFFF] bg-[#FF1F3D]">Blog</button></div>
     </nav>
- </header>
- <div id="categori-btn" class="flex justify-center gap-2 py-4">
-  <button id="all-btn" onclick="lodeVideo()" class="btn btn-sm  font-medium    ">All</button>
-  </div>
+    
+</header>
+<div id="categori-btn" class="flex justify-center gap-2 py-4">
+    <button id="all-btn" onclick="lodeVideo()" class="btn btn-sm  font-medium    ">All</button>
+</div>
+<div id="loder"  class="py-20 justify-center items-center flex hidden"><span class="loading loading-spinner loading-xl"></span></span></div>
 <main>
-    <section id="video-categori" class="w-11/12 mx-auto gap-4 py-4 grid lg:grid-cols-4 md:grid-cols-3 ">
-         <div class="col-span-full justify-center items-center text-center flex flex-col p-10">
-            <img class="w-50" src="assist/Icon.png" alt="">
-            <h1 class="text-[#171717] font-bold text-3xl">Oops!! Sorry, There is no content here</h1>
-         </div>
+    <section id="video-categori" class="w-11/12 mx-auto gap-4 py-4 grid lg:grid-cols-4 md:grid-cols-3  ">
+         
     </section>
     <!-- Open the modal using ID.showModal() method -->
     <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
@@ -44,6 +57,11 @@
     
   </div>
 </dialog>
+<div id="error-section" class="">
+
+</div>
+
+
 </main>
 
 <script src="script/script.js"></script>

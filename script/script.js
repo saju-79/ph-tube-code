@@ -1,3 +1,15 @@
+
+const showLoder =()=>{
+    document.getElementById("loder").classList.remove("hidden");
+    document.getElementById("video-categori").classList.add("hidden");
+}
+const hiddenLoder =()=>{
+    document.getElementById("loder").classList.add("hidden");
+    document.getElementById("video-categori").classList.remove("hidden");
+}
+
+
+
 function lodeCatagoriItem(){
     fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
     .then((res)=>res.json())
@@ -10,6 +22,7 @@ function displayCategoris(btns){
         const div =document.createElement("div");
         div.innerHTML=`
         <button id="btn-${btn.category_id}" onclick="susationBtn(${btn.category_id}) "  class="btn btn-sm bg-[#25252520] text-[#25252590] hover:bg-[#ff1f3d] hover:text-[#ffffff] font-medium ">${btn.category}</button>
+
         `
        
         prentsDiv.appendChild(div)
@@ -31,21 +44,37 @@ function removeActive(event){
 }
 
 function susationBtn(id){
+    showLoder()
     const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`
     fetch(url).then((res)=>res.json()).then((data)=>{
        
           const button = document.getElementById(`btn-${id}`)
            button.classList.add("active");
-        //   console.log(button)
            removeActive(button)
+         /*  const buttoId = (button.id.replace("btn-" , " "));
+           
+          if(buttoId == 1005){
+          
+          const errorPagse = document.getElementById("error-page")
+          errorPagse.classList.remove(" hidden ");
+             */
+
+        //   }
+        //    
 
        
          displayVideos(data.category)
     })
 }
 // video document
-function lodeVideo(){
-    fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+
+
+
+function lodeVideo(search = ""){
+    showLoder()
+    const url = `https://openapi.programming-hero.com/api/phero-tube/videos?title=${search} `
+    fetch(url)
+     
     .then((response) =>response.json())
     .then((data) => displayVideos(data.videos))
     document.getElementById("all-btn").classList.add("active")
@@ -109,6 +138,23 @@ ditelsVideo.appendChild(div)
 const displayVideos = (videos)=>{
     const videoSection = document.getElementById("video-categori");
     videoSection.innerHTML="";
+  if(videos.length == 0){
+    videoSection.innerHTML = `
+    <div id="error-page" class="col-span-full justify-center items-center text-center flex flex-col p-10 ">
+            <img class="w-50" src="assist/Icon.png" alt="">
+            <h1 class="text-[#171717] font-bold text-3xl">Oops!! Sorry, There is no content here</h1>
+         </div>
+    
+    
+    
+    `
+  }
+
+
+
+
+
+
     videos.forEach(video => {
         const videoId  = video.video_id
          
@@ -158,7 +204,17 @@ const displayVideos = (videos)=>{
     
    });
 
-}
+   hiddenLoder()
+
+};
+
+
+document.getElementById("search-input").addEventListener("keyup" , (e)=>{
+    console.log(e.target.value)
+    const index = e.target.value;
+    lodeVideo(index)
+
+})
 
 
 
