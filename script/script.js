@@ -14,4 +14,53 @@ function displayCategoris(btns){
         prentsDiv.appendChild(div)
     }
 }
+// video document
+function lodeVideo(){
+    fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+    .then((response) =>response.json())
+    .then((data) => displayVideos(data.videos))
+}
+const displayVideos = (videos)=>{
+   videos.forEach(video => {
+     const videoSection = document.getElementById("video-categori");
+     const videoCard = document.createElement("div");
+     videoCard.innerHTML=`
+          <div class="card bg-base-100 w-full shadow-sm">
+  <figure class="relative">
+    <img
+    class="w-full h-40 object-cover"
+      src="${video.thumbnail}"
+      alt="Shoes" />
+      <span class="absolute bottom-2 right-3 text-gray-400 bg-[#252525] px-1 rounded-sm  ">sdsdssdsd</span>
+  </figure>
+  <div class="flex gap-3 py-4  ">
+    <div class="avatar px-0 w-1/12">
+  <div class="ring-primary ring-offset-base-100 w-6 h-6 rounded-full ring-2 ring-offset-2">
+    <img src="${video.authors[0].profile_picture}" />
+  </div>
+</div>
+    <div class=" ">
+        <h2 class="font-bold text-[#171717] text-lg"> ${video.title}</h2>
+        <h2 class="font-medium text-[#17171770] text-sm flex gap-1"> ${video.authors[0].profile_name} <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+</svg>
+ </h2>
+        <h2 class="font-normal text-[#17171770] text-lg"> ${video.others.views} views</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  
+</svg>
+
+    </div>
+     
+   
+    
+  </div>
+</div>
+     
+     `
+     videoSection.appendChild(videoCard)
+   });
+
+}
 lodeCatagoriItem()
+lodeVideo()
