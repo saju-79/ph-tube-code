@@ -5,14 +5,21 @@ function lodeCatagoriItem(){
 }
 function displayCategoris(btns){
     for(let btn of btns){
-        console.log();
+       
        const prentsDiv = document.getElementById("categori-btn");
         const div =document.createElement("div");
         div.innerHTML=`
-        <button class="btn btn-sm bg-[#25252520] text-[#25252590] hover:bg-[#ff1f3d] hover:text-[#ffffff] font-medium ">${btn.category}</button>
+        <button onclick="susationBtn(${btn.category_id}) "  class="btn btn-sm bg-[#25252520] text-[#25252590] hover:bg-[#ff1f3d] hover:text-[#ffffff] font-medium ">${btn.category}</button>
         `
         prentsDiv.appendChild(div)
     }
+}
+
+function susationBtn(id){
+    const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`
+    fetch(url).then((res)=>res.json()).then((data)=>{
+         displayVideos(data.category)
+    })
 }
 // video document
 function lodeVideo(){
@@ -21,9 +28,13 @@ function lodeVideo(){
     .then((data) => displayVideos(data.videos))
 }
 const displayVideos = (videos)=>{
-   videos.forEach(video => {
-     const videoSection = document.getElementById("video-categori");
+    const videoSection = document.getElementById("video-categori");
+    videoSection.innerHTML="";
+    videos.forEach(video => {
+    
+     
      const videoCard = document.createElement("div");
+    
      videoCard.innerHTML=`
           <div class="card bg-base-100 w-full shadow-sm">
   <figure class="relative">
@@ -31,7 +42,7 @@ const displayVideos = (videos)=>{
     class="w-full h-40 object-cover"
       src="${video.thumbnail}"
       alt="Shoes" />
-      <span class="absolute bottom-2 right-3 text-gray-400 bg-[#252525] px-1 rounded-sm  ">sdsdssdsd</span>
+      <span class="absolute bottom-2 right-3 text-gray-400 bg-[#252525] px-1 rounded-sm  "> ${video.others.posted_date} </span>
   </figure>
   <div class="flex gap-3 py-4  ">
     <div class="avatar px-0 w-1/12">
@@ -58,9 +69,10 @@ const displayVideos = (videos)=>{
 </div>
      
      `
+
      videoSection.appendChild(videoCard)
+    
    });
 
 }
 lodeCatagoriItem()
-lodeVideo()
