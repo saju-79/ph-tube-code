@@ -9,8 +9,9 @@ function displayCategoris(btns){
        const prentsDiv = document.getElementById("categori-btn");
         const div =document.createElement("div");
         div.innerHTML=`
-        <button onclick="susationBtn(${btn.category_id}) "  class="btn btn-sm bg-[#25252520] text-[#25252590] hover:bg-[#ff1f3d] hover:text-[#ffffff] font-medium ">${btn.category}</button>
+        <button id="btn-${btn.category_id}" onclick="susationBtn(${btn.category_id}) "  class="btn btn-sm bg-[#25252520] text-[#25252590] hover:bg-[#ff1f3d] hover:text-[#ffffff] font-medium ">${btn.category}</button>
         `
+       
         prentsDiv.appendChild(div)
     }
 }
@@ -18,6 +19,15 @@ function displayCategoris(btns){
 function susationBtn(id){
     const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`
     fetch(url).then((res)=>res.json()).then((data)=>{
+          const button = document.getElementById(`btn-${id}`)
+           button.classList.add("active")
+          if (button) {
+            
+          } else {
+            
+          }
+         console.log(button)
+       
          displayVideos(data.category)
     })
 }
@@ -76,3 +86,4 @@ const displayVideos = (videos)=>{
 
 }
 lodeCatagoriItem()
+ 
