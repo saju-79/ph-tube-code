@@ -15,18 +15,30 @@ function displayCategoris(btns){
         prentsDiv.appendChild(div)
     }
 }
+function removeActive(event){
+   const activeBtn = document.getElementsByClassName("active");
+   document.getElementById("all-btn").classList.remove("active")
+    for(let btn of activeBtn){
+
+        for(let b of activeBtn){
+             b.classList.remove('active')
+       
+        }
+        btn.classList.add("active")
+        event.classList.add("active")
+    }
+   
+}
 
 function susationBtn(id){
     const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`
     fetch(url).then((res)=>res.json()).then((data)=>{
+       
           const button = document.getElementById(`btn-${id}`)
-           button.classList.add("active")
-          if (button) {
-            
-          } else {
-            
-          }
-         console.log(button)
+           button.classList.add("active");
+        //   console.log(button)
+           removeActive(button)
+
        
          displayVideos(data.category)
     })
@@ -36,6 +48,7 @@ function lodeVideo(){
     fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
     .then((response) =>response.json())
     .then((data) => displayVideos(data.videos))
+    document.getElementById("all-btn").classList.add("active")
 }
 const displayVideos = (videos)=>{
     const videoSection = document.getElementById("video-categori");
@@ -86,4 +99,5 @@ const displayVideos = (videos)=>{
 
 }
 lodeCatagoriItem()
+
  
